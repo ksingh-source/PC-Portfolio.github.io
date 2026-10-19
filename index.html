@@ -1,15 +1,437 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101018">
+    <meta name="description" content="Priya Choudhary's personal portfolio website.">
+
+    <title>Priya Choudhary | My Portfolio</title>
+
+    <style>
+        :root {
+            --bg: #101018;
+            --card: #191923;
+            --text: #f7f5ff;
+            --muted: #b8b3c9;
+            --accent: #d8ccff;
+            --border: #353044;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background:
+                radial-gradient(ellipse at 80% 10%, #d8ccff14, transparent 40%),
+                var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1050px, 88%);
+            margin: auto;
+        }
+
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(16, 16, 24, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: bold;
+        }
+
+        .logo span,
+        .accent {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            padding: 90px 0;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            line-height: 1.12;
+            letter-spacing: -2px;
+            margin: 20px 0;
+        }
+
+        .hero p,
+        .section-intro {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            color: #211a31;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--card);
+        }
+
+        /* Sections */
+        section:not(.hero) {
+            padding: 65px 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 12px;
+        }
+
+        .section-intro {
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 26px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 8px;
+            background: #d8ccff12;
+            border: 1px solid #d8ccff35;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 25px 0;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        @media (max-width: 650px) {
+            nav {
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                gap: 12px 18px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 85px 0;
+            }
+
+            h1 {
+                letter-spacing: -1px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to My Portfolio</h1>
-    <p>Click the link below to view my presentation slides:</p>
-    
-    <!-- PASTE YOUR PDF LINK CODE HERE -->
-    <a href="Priya Portfolio_compressed.pdf" target="_blank">📄 View My Portfolio Presentation</a>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">Priya<span>.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Home -->
+        <section class="hero container" id="home">
+            <div>
+                <div class="eyebrow">Welcome to my portfolio</div>
+
+                <h1>
+                    Hello, I'm<br>
+                    <span class="accent">Priya Choudhary.</span>
+                </h1>
+
+                <p>
+                    Welcome to my personal portfolio website.
+                    Explore my background, skills and portfolio presentation.
+                </p>
+
+                <div class="buttons">
+                    <a href="#portfolio" class="btn btn-primary">
+                        View My Portfolio ↗
+                    </a>
+
+                    <a href="#about" class="btn btn-secondary">
+                        About Me
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">
+                    About <span class="accent">Me</span>
+                </h2>
+
+                <p class="section-intro">
+                    Get to know me and explore my work.
+                </p>
+
+                <div class="card">
+                    <h3>My Introduction</h3>
+                    <p>
+                        I am Priya Choudhary. This portfolio presents
+                        my background and work. Please view my portfolio
+                        presentation below for my detailed information.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">
+                    My <span class="accent">Skills</span>
+                </h2>
+
+                <p class="section-intro">
+                    My skills and areas of expertise.
+                </p>
+
+                <div class="card">
+                    <h3>Skills & Expertise</h3>
+                    <p>
+                        Please refer to my portfolio presentation for
+                        my verified skills and areas of expertise.
+                    </p>
+                </div>
+
+                <!-- Add your actual skills here after verifying them.
+                Example:
+                <div class="tags">
+                    <span class="tag">Your Skill</span>
+                    <span class="tag">Another Skill</span>
+                </div>
+                -->
+            </div>
+        </section>
+
+        <!-- Portfolio PDF -->
+        <section id="portfolio">
+            <div class="container">
+                <h2 class="section-title">
+                    My <span class="accent">Portfolio</span>
+                </h2>
+
+                <p class="section-intro">
+                    View my portfolio presentation for more details
+                    about my work and background.
+                </p>
+
+                <div class="card">
+                    <h3>📄 My Portfolio Presentation</h3>
+
+                    <p>
+                        Open my PDF presentation in a new browser tab.
+                    </p>
+
+                    <!-- Your original PDF link is preserved -->
+                    <div class="buttons">
+                        <a
+                            href="./Priya%20Portfolio_compressed.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-primary"
+                        >
+                            View My Portfolio Presentation ↗
+                        </a>
+
+                        <a
+                            href="./Priya%20Portfolio_compressed.pdf"
+                            download
+                            class="btn btn-secondary"
+                        >
+                            Download PDF ↓
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">
+                    Let's <span class="accent">Connect</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        Thank you for visiting my portfolio.
+                        You can explore my presentation above to learn more.
+                    </p>
+
+                    <!-- Add your real email or professional links here -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            © <span id="year"></span> Priya Choudhary. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
 
 </body>
 </html>
